@@ -5,15 +5,22 @@
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
   if(license === 'MIT'){
-    return 'https://img.shields.io/badge/license-MIT-brightgreen';
+    return `
+[![License](https://img.shields.io/badge/license-MIT-brightgreen)](https://opensource.org/licenses/MIT)
+    `
   }
   if(license === 'GNU GPLv3'){
-    return 'https://img.shields.io/badge/license-GNU%20GPLv3-orange';
+    return `
+[![License](https://img.shields.io/badge/license-GNU%20GPLv3-orange)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+    `
   }
   if(license === 'Attribution 4.0 International'){
-    return 'https://img.shields.io/badge/license-Attribution%204.0%20International-lightgrey';
+    return `
+[![License](https://img.shields.io/badge/license-Attribution%204.0%20International-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
+    `
+    return '';
   }
-  if(!license){
+  if(license === 'No license'){
     return '';
   }
 }
@@ -22,13 +29,13 @@ function renderLicenseBadge(license) {
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
   if(license === 'MIT'){
-    return 'https://opensource.org/licenses/MIT';
+    return '';
   }
   if(license === 'GNU GPLv3'){
-    return 'https://www.gnu.org/licenses/gpl-3.0.en.html';
+    return '';
   }
   if(license === 'Attribution 4.0 International'){
-    return 'https://creativecommons.org/licenses/by/4.0/';
+    return '';
   }
 }
 
@@ -37,17 +44,57 @@ function renderLicenseLink(license) {
 function renderLicenseSection(license) {
   if(license === 'MIT'){
     return `
-  [![License](${renderLicenseBadge(license)})](${renderLicenseLink(license)})
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
     `
   }
   if(license === 'GNU GPLv3'){
     return `
-  [![License](${renderLicenseBadge(license)})](${renderLicenseLink(license)})
+    GNU GENERAL PUBLIC LICENSE
+    Version 3, 29 June 2007
+
+Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
     `
   }
   if(license === 'Attribution 4.0 International'){
     return `
-  [![License](${renderLicenseBadge(license)})](${renderLicenseLink(license)})
+
+You are free to:
+
+Share — copy and redistribute the material in any medium or format
+Adapt — remix, transform, and build upon the material
+for any purpose, even commercially.
+
+    
+Under the following terms:
+
+Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+
+    `
+  }
+  if(license === 'No license'){
+    return `
+No Licensing
     `
   }
 }
@@ -133,6 +180,7 @@ For answers to common questions about this code of conduct, see the FAQ at https
 function generateMarkdown(data) {
   return `# ${data.title}
 
+  ${renderLicenseBadge(data.license)}
   ## Description
   ${data.description}
   
@@ -143,7 +191,8 @@ function generateMarkdown(data) {
   - [Credits](#credits)
   - [License](#license)
   - [Features](#features)
-  - [How To Contribute](#how to contribute)
+  - [How To Contribute](#contribution)
+  - [Questions](#questions)
   
   ## Installation
   ${data.installation}
@@ -160,9 +209,13 @@ function generateMarkdown(data) {
   ## Features
   ${data.features}
   
-  ## How to Contribute
+  ## Contribution
   ${contribute(data.contribute)}
   
+  ## Questions
+  ## [Github](${data.github})
+
+  ## [Email](${data.email})
 `;
 }
 

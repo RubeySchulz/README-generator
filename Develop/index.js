@@ -7,7 +7,16 @@ const pictures = () => fs.readdirSync('./screenshots');
 
 // TODO: Create an array of questions for user input
 const questions = [
-    
+    {
+        type: 'input',
+        name: 'github',
+        message: 'What is your Github'
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'What is your email?'
+    },
     //Project Title
     {
         type: 'input',
@@ -46,7 +55,8 @@ const questions = [
         choices: [
             'MIT',
             'GNU GPLv3',
-            'Attribution 4.0 International'
+            'Attribution 4.0 International',
+            'No license'
         ]
     },
     //Features
